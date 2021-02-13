@@ -1,0 +1,71 @@
+nav.navbar {
+    background-color:green;
+}
+
+input, textarea {
+    border:1px solid black;
+
+}
+
+input.form-control:focus, input:focus, textarea:focus {
+    border-color: rebeccapurple;
+    box-shadow: 0 0 0 .2rem rgba(102, 51, 193, 0.5);
+}
+
+button[type=submit] {
+    background-color: rebeccapurple;
+    border: rebeccapurple;
+}
+
+button[type="submit"]:hover {
+    background-color: rgba(62, 21, 153, 1);
+}
+
+a.btn-link:hover, .navbar-light .navbar-nav a.nav-link:hover {
+    color: rgb(62, 23, 104);
+    text-decoration:none;
+}
+
+
+a.btn-link, a.nav-link, .navbar-light .navbar-nav a.nav-link {
+    color:rebeccapurple;
+}
+
+td.actions-icons .navbar-brand {
+    margin-right:0 !important;
+    cursor:pointer;
+}
+
+.table-container .title h3 {
+    padding:25px 0;
+}
+
+.actions-icons {
+    width:200px;
+}
+
+.actions-icons img {
+    width:40px;
+}
+
+.footer-button {
+    position:relative;
+}
+
+.footer-button .btn {
+    background-color:rebeccapurple;
+}
+
+.center {
+    text-align:center;
+}
+
+.note-actions img {
+    width:50px;
+    height:50px;
+    padding:5px;
+}
+
+.note-actions a:hover {
+    text-decoration:none;
+}
