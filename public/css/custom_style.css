@@ -52,8 +52,20 @@ td.actions-icons .navbar-brand {
     position:relative;
 }
 
-.footer-button .btn {
+.footer-button .btn, .btn-primary {
     background-color:rebeccapurple;
+    border:0;
+    margin-left:10px;
+}
+
+.footer-button .btn:hover, .btn-primary:hover {
+    background-color:#51287a;
+    border:0;
+}
+
+a:not([href]):not([tabindex]).modalTrigger:hover {
+    text-decoration:underline;
+    cursor:pointer;
 }
 
 .center {
@@ -68,4 +80,12 @@ td.actions-icons .navbar-brand {
 
 .note-actions a:hover {
     text-decoration:none;
+}
+
+#note-destroy-form {
+    display:inline-block;
+}
+
+#note-destroy-form button {
+    background-color:transparent;
 }

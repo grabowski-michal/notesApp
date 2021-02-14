@@ -20,6 +20,7 @@
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
     
     <link href="{{ URL::asset('css/custom_style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <style>
         body {
             background-color: #e8e8e8;
@@ -53,27 +54,51 @@
         <table data-toggle='table'>
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Created</th>
-                    <th>Modified</th>
+                    <th>@sortablelink('title')</th>
+                    <th>@sortablelink('created_at', 'Created')</th>
+                    <th>@sortablelink('updated_at', 'Modified')</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($notes as $note)
                     <tr>
-                        <td>{{$note->id}}</td>
-                        <td>{{$note->title}}</td>
+                        <td>
+                            <a class="modalTrigger" data-toggle="modal" data-target="#exampleModal{{$note->id}}">
+                                {{$note->title}}
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{$note->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{$note->title}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{$note->content}}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </td>
                         <td>{{$note->created_at}}</td>
                         <td>{{$note->updated_at}}</td>
                         <td class="note-actions">
                             <a href="{{ route('edit', $note->id) }}">
                                 <img src="img/edit.png" alt="Edit note">
                             </a>
-                            <a href="{{ route('destroy', $note->id) }}">
-                                <img src="img/remove.png" alt="Remove note">
-                            </a>
+                            <form role="form" method="get" action="{{ route('destroy', $note->id) }}" id="note-destroy-form"
+                                method="post" enctype="multipart/form-data">
+                                <button type="submit" class="btn btn-success">
+                                    <img src="img/remove.png" alt="Remove note">
+                                </button>
+                            </form>
                             <a href="{{ route('history', $note->id) }}">
                                 <img src="img/history.png" alt="History of the note">
                             </a>
@@ -85,6 +110,10 @@
         <div class='footer-button'>
             <a href="{{ route('create') }}" class="btn btn-secondary">Add note</a>
         </div>
+        <div class='footer-button'>
+            <a href="{{ route('fullHistory') }}" class="btn btn-secondary">Show full history</a>
+        </div>
+        {!! $notes->appends(\Request::except('page'))->render() !!}
     </div>
 </body>
 </html>

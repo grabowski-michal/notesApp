@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add note</title>
+    <title>Edit note</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -45,7 +45,7 @@
 <body>
     <div class='table-container'>
         <div class='title center'>
-            <h3>Add note form</h3>
+            <h3>Edit note form</h3>
         </div>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -58,21 +58,22 @@
         @endif
     </div>
     <div class="box box-primary">
-        <form role="form" action="{{ route('store')}}" id="note-form"
+        <form role="form" method="post" action="{{ route('update', $note->id)}}" id="note-form"
             method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+            <input name="_method" type="hidden" value="PUT">
             <div class="box">
                 <div class="box-body">
                     <div class="form-group{{ $errors->has('message')?'has-error':''}}" id="roles_box">
                         <label><b>Title</b></label> <br>
-                        <input type="text" name="title" id="title" required> <br>
+                        <input type="text" name="title" value="{{ $note->title }}" id="title" required> <br>
                         <label><b>Content</b></label> <br>
-                        <textarea name="content" id="content" cols="20" rows="5" required></textarea>
+                        <textarea name="content" id="content" value="{{ $note->content }}" cols="20" rows="5" required>{{ $note->content }}</textarea>
                     </div>
                 </div>
             </div>
             <div class="box-footer">
-                <button type="submit" class="btn btn-success">Add one</button>
+                <button type="submit" class="btn btn-success">Edit note</button>
             </div>
         </form>
     </div>

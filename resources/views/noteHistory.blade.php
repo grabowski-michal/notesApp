@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add note</title>
+    <title>{{$title}} history</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -19,62 +19,82 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
     
-    <link href="{{ URL::asset('css/custom_style.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/../css/custom_style.css') }}" rel="stylesheet">
     <style>
         body {
             background-color: #e8e8e8;
         }
         .title {
             text-align: center;
-            background-color: #e8e8e8;
+            background-color: transparent;
         }
         .table-container {
             background-color: white;
             max-width: 900px;
-            margin:0 auto;
+            margin: 0 auto;
+            padding-bottom:3%;
         }   
-        .box {
-            display: flex;
-            justify-content: center;
-        }
-        .box-footer{
+        .footer-button {
+            background-color: transparent;
             float: right;
+            margin-top: 5%;
+        }
+        table {
+            max-width: 800px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
     <div class='table-container'>
         <div class='title center'>
-            <h3>Add note form</h3>
+            <h3>{{$title}} history</h3>
         </div>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }} </li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-    </div>
-    <div class="box box-primary">
-        <form role="form" action="{{ route('store')}}" id="note-form"
-            method="post" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div class="box">
-                <div class="box-body">
-                    <div class="form-group{{ $errors->has('message')?'has-error':''}}" id="roles_box">
-                        <label><b>Title</b></label> <br>
-                        <input type="text" name="title" id="title" required> <br>
-                        <label><b>Content</b></label> <br>
-                        <textarea name="content" id="content" cols="20" rows="5" required></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="box-footer">
-                <button type="submit" class="btn btn-success">Add one</button>
-            </div>
-        </form>
+        <table data-toggle='table'>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($noteHistory as $record)
+                    <tr>
+                        <td>
+                            <a class="modalTrigger" data-toggle="modal" data-target="#exampleModal{{$record->version_id}}">
+                                {{$record->model_data['title']}}
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{$record->version_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{$record->model_data['title']}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{$record->model_data['content']}}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </td>
+                        <td>{{$record->model_data['content']}}</td>
+                        <td>{{$record->updated_at}}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <div class='footer-button'>
+            <a href="{{ route('notes') }}" class="btn btn-secondary">Go back</a>
+        </div>
+        {!! $noteHistory->appends(\Request::except('page'))->render() !!}
     </div>
 </body>
 </html>
