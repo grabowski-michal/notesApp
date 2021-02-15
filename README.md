@@ -7,7 +7,9 @@ https://getcomposer.org/download/
 https://www.apachefriends.org/download.html
 
 - **Laravel framework installed (at least ^7.0 version, ^8.0 preferable)**
+
   *to install Laravel just run command:*
+  
   composer global require laravel/installer
 
 ## Steps how to setup database for the project
