@@ -17,16 +17,27 @@ https://www.apachefriends.org/download.html
     1. Install XAMPP environment with MySQL database support.
 
     2. Open XAMPP Control Panel and start MySQL database.
+    
+    3. Open main project folder NotesApp after downloading and unzipping it.
+    
+    4. Run command in terminal/cmd:
+    
+    php artisan migrate
+    
+    to add database and proper default tables (migrations).
 
-    3. That's it.
-
-You don't need to set any user accounts, passwords, databases or tables. Laravel will do it for you.
+    5. Make sure if the database laravel with proper tables (notes, versions) has appeared in phpMyAdmin.
+    
+    To do this launch Apache server in XAMPP environment and go to http://localhost/phpmyadmin.
+    
+    Check if database 'laravel' there exists and if there are tables such as `notes` and `versions`.
 
 ## Steps how to build and run the project
 
     1. Open main project folder NotesApp after downloading and unzipping it.
 
-    2. Run command in terminal/command prompt:
+    2. Run command in terminal/cmd:
+    
     php artisan serve
 
     3. Now you should see information that Laravel development server has successfully started at http://127.0.0.1:8000/ (your local address).
