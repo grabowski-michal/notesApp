@@ -3,7 +3,7 @@
 - **Composer package manager (version preferable ^2.0.8)**
 https://getcomposer.org/download/
 
-- **XAMPP development environment with PHP (at least ^7.3) and MySQL DB installed
+- **XAMPP development environment with PHP (at least ^7.3) and MySQL DB installed**
 https://www.apachefriends.org/download.html
 
 - **Laravel framework installed (at least ^7.0 version, ^8.0 preferable)**
