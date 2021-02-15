@@ -125,8 +125,17 @@ class NotesController extends Controller
         $noteHistory = DB::table('versions')->paginate(10);
         $title = "All notes";
         foreach ($noteHistory as $key => $value) {
+            $id = ($value->versionable_id)+0;
+            $note = Note::find($id);
+            if ($note == NULL) {
+                $note = new Note();
+                $note->id = $id;
+                $note->title = "Not-existent";
+                $note->content = "Not-existent";
+            }
             $value->model_data = unserialize($value->model_data);
+            $value->note = $note;
         }
-        return view('noteHistory', compact('noteHistory'), compact('title'));
+        return view('allHistory', compact('noteHistory'), compact('title'));
     }
 }

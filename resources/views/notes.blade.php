@@ -58,6 +58,12 @@
                     <th>@sortablelink('created_at', 'Created')</th>
                     <th>@sortablelink('updated_at', 'Modified')</th>
                     <th>Actions</th>
+                    <script>
+                        $(".fa-sort-asc").addClass("fa-sort-down");
+                        $(".fa-sort-desc").addClass("fa-sort-up");
+                        $(".fa-sort-numeric-asc").addClass("fa-sort-numeric-down");
+                        $(".fa-sort-numeric-desc").addClass("fa-sort-numeric-up");
+                    </script>
                 </tr>
             </thead>
             <tbody>

@@ -89,3 +89,44 @@ a:not([href]):not([tabindex]).modalTrigger:hover {
 #note-destroy-form button {
     background-color:transparent;
 }
+
+.paginateDivWrapper {
+    text-align:center;
+}
+.paginateDiv {
+    display:inline-block;
+}
+.paginateDiv ul li a {
+    padding:10px;
+    color:white;
+}
+.paginateDiv ul li a:hover {
+    text-decoration:none;
+}
+.paginateDiv ul li {
+    background-color:rebeccapurple;
+    border-radius:5px;
+    margin-left:10px;
+}
+
+.paginateDiv ul li:hover {
+    background-color:#51287a;
+}
+
+.paginateDiv ul li.disabled:hover, .paginateDiv ul li.active:hover {
+    background-color:rebeccapurple;
+}
+
+.paginateDiv ul li.disabled a, .paginateDiv ul li.active a {
+    color:gray;
+}
+
+.paginateDiv ul li.disabled a:hover, .paginateDiv ul li.active a:hover {
+    text-decoration:none;
+    color:gray;
+    cursor:initial;
+}
+
+.modal-body {
+    word-break: break-all;
+}

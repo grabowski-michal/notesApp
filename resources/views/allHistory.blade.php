@@ -54,6 +54,7 @@
             <thead>
                 <tr>
                     <th>Previous title</th>
+                    <th>Current title</th>
                     <th>Modified</th>
                 </tr>
             </thead>
@@ -84,6 +85,30 @@
                             </div>
                             </div>
                         </td>
+                        <td>
+                            <a class="modalTrigger" data-toggle="modal" data-target="#currentTitle{{$record->note->id}}">
+                                {{$record->note->title}}
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="currentTitle{{$record->note->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{$record->note->title}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{$record->note->content}}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </td>
                         <td>{{$record->updated_at}}</td>
                     </tr>
                 @endforeach
@@ -92,6 +117,7 @@
         <div class='footer-button'>
             <a href="{{ route('notes') }}" class="btn btn-secondary">Go back</a>
         </div>
+        @include('pagination.default', ['paginator' => $noteHistory])
     </div>
 </body>
 </html>
