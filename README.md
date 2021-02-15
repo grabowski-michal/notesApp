@@ -69,3 +69,13 @@ The integration tests can add, remove, edit the notes automatically (using the M
        2.4. After clicking the button you are redirected to the main page.
        
        2.5. Check if the note has been successfully added.
+
+## Icons used in project are:
+
+https://uxwing.com/history-icon/
+
+https://uxwing.com/edit-round-line-icon/
+
+https://uxwing.com/recycle-bin-line-icon/
+
+https://fontawesome.com/
